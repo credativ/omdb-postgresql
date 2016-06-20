@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -eu
+
+BASE="http://www.omdb.org/data/"
+
+FILES="
+all_movies
+all_series
+all_seasons
+all_episodes
+
+all_people
+all_people_aliases
+people_links
+
+all_casts
+job_names
+all_characters
+
+movie_categories
+movie_keywords
+category_names
+trailers
+movie_links
+
+image_ids
+image_licenses
+
+all_movie_aliases_iso
+
+all_votes
+movie_languages
+movie_countries
+movie_details
+movie_references
+movie_abstracts_de
+movie_abstracts_en
+"
+
+mkdir -p data
+
+for f in $FILES; do
+  wget --mirror "$BASE$f.csv.bz2"
+done
