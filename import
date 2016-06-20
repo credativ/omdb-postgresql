@@ -2,8 +2,6 @@
 
 set -eu
 
-BASE="http://www.omdb.org/data/"
-
 FILES="
 all_movies
 all_series
@@ -39,5 +37,8 @@ movie_abstracts_en
 "
 
 for f in $FILES; do
-  wget --mirror "$BASE$f.csv.bz2"
+  bzcat www.omdb.org/data/$f.csv.bz2 | ./import.pl $f
 done
+
+psql -c 'VACUUM' omdb
+psql -c 'ANALYZE' omdb
