@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# http://www.omdb.org/content/Help:DataDownload
+#
+# Alle Textinformationen in omdb stehen sowohl unter der Creative
+# Commons-Lizenz (Namensnennung 2.0 Deutschland) als auch unter der GNU-Lizenz
+# für freie Dokumentation.
+
 set -eu
 
 BASE="http://www.omdb.org/data/"
