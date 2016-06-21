@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE all_movies (id bigint, name text, parent_id bigint, date date);
 CREATE TABLE all_series (id bigint, name text, parent_id bigint, date date);
 CREATE TABLE all_seasons (id bigint, name text, parent_id bigint, date date);
@@ -25,3 +27,5 @@ CREATE TABLE movie_abstracts_de (movie_id bigint, abstract text);
 CREATE TABLE movie_abstracts_en (movie_id bigint, abstract text);
 
 COMMENT ON TABLE trailers is 'Youtube Trailer';
+
+COMMIT;
