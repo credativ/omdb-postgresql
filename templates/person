@@ -6,6 +6,6 @@
 Movies:
 <ul>
 [% FOR m IN movies %]
-<li><a href="../movie/$m.movie_id">$m.movie_name</a> ($m.date, $m.job_name)</li>
+<li><a href="../movie/$m.movie_id-$m.movie_name">$m.movie_name</a> ($m.date, $m.job_name)</li>
 [% END %]
 </ul>

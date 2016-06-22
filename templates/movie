@@ -4,15 +4,15 @@
 [% IF movie_details.budget %]<li>Budget: $movie_details.budget</li>[% END %]
 [% IF movie_details.revenue %]<li>Revenue: $movie_details.revenue</li>[% END %]
 [% IF movie_details.homepage %]<li>Homepage: <a href="$movie_details.homepage">$movie_details.homepage</a></li>[% END %]
-[% IF series %]<li>Part of series: <a href="$series.id">$series.name</a></li> [% END %]
-[% IF parent %]<li>Parent: <a href="$parent.id">$parent.name</a></li> [% END %]
+[% IF series %]<li>Part of series: <a href="$series.id-$series.name">$series.name</a></li> [% END %]
+[% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a></li> [% END %]
 </ul>
 
 [% IF child_movies.0 %]
 Child movies:
 <ul>
 [% FOR c IN child_movies %]
-<li><a href="$c.id">$c.name</a> ($c.kind)</li>
+<li><a href="$c.id-$c.name">$c.name</a> ($c.kind)</li>
 [% END %]
 </ul>
 [% END %]
@@ -21,7 +21,7 @@ Child movies:
 Episodes:
 <ul>
 [% FOR e IN episodes %]
-<li><a href="$e.id">$e.name</a> ($e.kind)</li>
+<li><a href="$e.id-$e.name">$e.name</a> ($e.kind)</li>
 [% END %]
 </ul>
 [% END %]
@@ -29,13 +29,13 @@ Episodes:
 Cast:
 <ul>
 [% FOR c IN cast %]
-<li><a href="../person/$c.person_id">$c.person_name</a> ($c.job_name)</li>
+<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a> ($c.job_name)</li>
 [% END %]
 </ul>
 
 Categories:
 <ul>
 [% FOR c IN categories %]
-<li><a href="../category/$c.id">$c.name</a></li>
+<li><a href="../category/$c.id-$c.name">$c.name</a></li>
 [% END %]
 </ul>
