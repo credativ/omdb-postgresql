@@ -1,12 +1,12 @@
 BEGIN;
 
-ALTER TABLE movies          -- ADD FOREIGN KEY (parent_id) REFERENCES movies (id),
+ALTER TABLE movies             ADD FOREIGN KEY (parent_id) REFERENCES movies (id),
                                ADD FOREIGN KEY (series_id) REFERENCES movies (id);
---ALTER TABLE people_aliases     ADD FOREIGN KEY (person_id) REFERENCES people (id);
+ALTER TABLE people_aliases     ADD FOREIGN KEY (person_id) REFERENCES people (id);
 ALTER TABLE people_links       ADD FOREIGN KEY (person_id) REFERENCES people (id);
 ALTER TABLE casts              ADD FOREIGN KEY (movie_id) REFERENCES movies (id),
                                ADD FOREIGN KEY (person_id) REFERENCES people (id),
-                               ADD FOREIGN KEY (job_id) REFERENCES job_names (job_id);
+                               ADD FOREIGN KEY (job_id) REFERENCES jobs (job_id);
 ALTER TABLE movie_categories   ADD FOREIGN KEY (movie_id) REFERENCES movies (id),
                                ADD FOREIGN KEY (category_id) REFERENCES categories (category_id);
 ALTER TABLE movie_keywords     ADD FOREIGN KEY (movie_id) REFERENCES movies (id),

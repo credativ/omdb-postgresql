@@ -1,9 +1,9 @@
 BEGIN;
 
-CREATE TEMP TABLE all_movies (id bigint, name text, parent_id bigint, date date);
-CREATE TEMP TABLE all_series (id bigint, name text, parent_id bigint, date date);
-CREATE TEMP TABLE all_seasons (id bigint, name text, parent_id bigint, date date);
-CREATE TEMP TABLE all_episodes (id bigint, name text, parent_id bigint, date date, series_id bigint);
+CREATE TEMP TABLE IF NOT EXISTS all_movies   (id bigint, name text, parent_id bigint, date date);
+CREATE TEMP TABLE IF NOT EXISTS all_series   (id bigint, name text, parent_id bigint, date date);
+CREATE TEMP TABLE IF NOT EXISTS all_seasons  (id bigint, name text, parent_id bigint, date date);
+CREATE TEMP TABLE IF NOT EXISTS all_episodes (id bigint, name text, parent_id bigint, date date, series_id bigint);
 
 \copy all_movies            FROM PROGRAM 'bzcat www.omdb.org/data/all_movies.csv.bz2'            WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy all_series            FROM PROGRAM 'bzcat www.omdb.org/data/all_series.csv.bz2'            WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
@@ -20,11 +20,12 @@ INSERT INTO movies (SELECT id, name, parent_id, date, series_id, 'episode' FROM 
 \copy people_links          FROM PROGRAM 'bzcat www.omdb.org/data/people_links.csv.bz2'          WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy casts                 FROM PROGRAM 'bzcat www.omdb.org/data/all_casts.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy job_names             FROM PROGRAM 'bzcat www.omdb.org/data/job_names.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
+INSERT INTO jobs SELECT job_id, name FROM job_names WHERE language = 'en';
 \copy characters            FROM PROGRAM 'bzcat www.omdb.org/data/all_characters.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_categories      FROM PROGRAM 'bzcat www.omdb.org/data/movie_categories.csv.bz2'      WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_keywords        FROM PROGRAM 'bzcat www.omdb.org/data/movie_keywords.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy category_names        FROM PROGRAM 'bzcat www.omdb.org/data/category_names.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
-INSERT INTO categories SELECT category_id, name FROM category_names WHERE language_iso_639_1 = 'en';
+INSERT INTO categories SELECT category_id, name FROM category_names WHERE language = 'en';
 \copy trailers              FROM PROGRAM 'bzcat www.omdb.org/data/trailers.csv.bz2'              WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_links           FROM PROGRAM 'bzcat www.omdb.org/data/movie_links.csv.bz2'           WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy image_ids             FROM PROGRAM 'bzcat www.omdb.org/data/image_ids.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
@@ -38,8 +39,4 @@ INSERT INTO categories SELECT category_id, name FROM category_names WHERE langua
 \copy movie_abstracts_de    FROM PROGRAM 'bzcat www.omdb.org/data/movie_abstracts_de.csv.bz2'    WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_abstracts_en    FROM PROGRAM 'bzcat www.omdb.org/data/movie_abstracts_en.csv.bz2'    WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 
-ANALYZE;
-
 COMMIT;
-
-VACUUM;
