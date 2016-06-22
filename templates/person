@@ -1,0 +1,11 @@
+<ul>
+[% IF person.birthday %]<li>Born: $person.birthday</li>[% END %]
+[% IF person.deathday %]<li>Died: $person.deathday</li>[% END %]
+</ul>
+
+Movies:
+<ul>
+[% FOR m IN movies %]
+<li><a href="../movie/$m.movie_id">$m.movie_name</a> ($m.date, $m.job_name)</li>
+[% END %]
+</ul>

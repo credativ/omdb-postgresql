@@ -1,0 +1,6 @@
+Movies in this category:
+<ul>
+[% FOR m IN movies %]
+<li><a href="../movie/$m.id">$m.name</a> ($m.date)</li>
+[% END %]
+</ul>
