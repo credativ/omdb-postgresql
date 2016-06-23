@@ -5,6 +5,7 @@ use warnings;
 use CGI;
 use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
 use DBD::Pg;
+use Encode;
 use Template;
 
 binmode STDOUT, ':encoding(UTF-8)';
@@ -124,7 +125,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 	});
 
 } elsif ($path =~ m!^/character/(.+)!) { # plain text
-	my $character = $1;
+	my $character = decode('UTF-8', $1);
 
 	process('character', {
 		title => "$character",
