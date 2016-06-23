@@ -50,7 +50,9 @@ Trailers:
 Cast:
 <ul>
 [% FOR c IN cast %]
-<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a> (<a href="../job/$c.id-$c.job_name">$c.job_name</a>)</li>
+<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a>
+  [% IF c.role %]as <em><a href="../character/$c.role">$c.role</a></em>[% END %]
+  (<a href="../job/$c.id-$c.job_name">$c.job_name</a>)</li>
 [% END %]
 </ul>
 

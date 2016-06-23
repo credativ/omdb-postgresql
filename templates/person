@@ -6,7 +6,9 @@
 Movies:
 <ul>
 [% FOR m IN movies %]
-<li><a href="../movie/$m.movie_id-$m.movie_name">$m.movie_name</a> ($m.date, <a href="../job/$m.job_id-$m.job_name">$m.job_name</a>)</li>
+<li><a href="../movie/$m.movie_id-$m.movie_name">$m.movie_name</a>
+  [% IF m.role %]as <em><a href="../character/$m.role">$m.role</a></em>[% END %]
+  ($m.date, <a href="../job/$m.job_id-$m.job_name">$m.job_name</a>)</li>
 [% END %]
 </ul>
 

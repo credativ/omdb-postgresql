@@ -123,6 +123,15 @@ if ($path =~ m!^/movie/(\d+)!) {
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
 	});
 
+} elsif ($path =~ m!^/character/(.+)!) { # plain text
+	my $character = $1;
+
+	process('character', {
+		title => "$character",
+		character => $character,
+		cast => selectall_hashrows("SELECT *, p.name AS person_name, m.name AS movie_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN movies m ON (c.movie_id = m.id) WHERE c.role = ? ORDER BY m.date", $character),
+	});
+
 } elsif ($path =~ m!^/category/(\d+)!) {
 	my $category_id = $1;
 
