@@ -182,6 +182,16 @@ if ($path =~ m!^/movie/(\d+)!) {
 		people => selectall_hashrows("SELECT * FROM people p ORDER BY random() LIMIT 10"),
 	});
 
+} elsif ($path =~ m!^/search!) {
+	my $query = $q->param('q') || 'Lola rennt';
+
+	process('search', {
+		title => "OMDB Search: $query",
+		movies => selectall_hashrows("SELECT * FROM movies m WHERE name ILIKE ? ORDER BY m.date, m.name", "%$query%"),
+		people => selectall_hashrows("SELECT * FROM people p WHERE name ILIKE ? ORDER BY p.name", "%$query%"),
+		characters => selectall_hashrows("SELECT *, p.name AS person_name, m.name AS movie_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN movies m ON (c.movie_id = m.id) WHERE c.role ILIKE ? ORDER BY m.date", "%$query%"),
+	});
+
 } else {
 	print "<pre>";
 	print "$_: $ENV{$_}\n" foreach (sort keys %ENV);

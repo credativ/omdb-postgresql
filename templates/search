@@ -1,0 +1,28 @@
+[% IF movies.0 %]
+Movies:
+<ul>
+[% FOR r IN movies %]
+<li><a href="movie/$r.id-$r.name">$r.name</a> ($r.kind, $r.date)</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF people.0 %]
+People:
+<ul>
+[% FOR r IN people %]
+<li><a href="person/$r.id-$r.name">$r.name</a></li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF characters.0 %]
+Characters:
+<ul>
+[% FOR c IN characters %]
+<li><a href="person/$c.person_id-$c.person_name">$c.person_name</a>
+  as <em><a href="character/$c.role">$c.role</a></em>
+  in <a href="movie/$c.movie_id-$c.movie_name">$c.movie_name</a> ($c.date)</li>
+[% END %]
+</ul>
+[% END %]

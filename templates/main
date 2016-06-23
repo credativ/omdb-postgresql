@@ -1,14 +1,19 @@
-
-Movies:
+10 random movies:
 <ul>
 [% FOR m IN movies %]
 <li><a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind, $m.date)</li>
 [% END %]
 </ul>
 
-People:
+10 random people:
 <ul>
 [% FOR p IN people %]
 <li><a href="$script_name/person/$p.id-$p.name">$p.name</a></li>
 [% END %]
 </ul>
+
+Search:
+<form action="$script_name/search" method="GET">
+<input name="q" size="40">
+<input type="submit">
+</form>
