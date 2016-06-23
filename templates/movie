@@ -34,8 +34,8 @@ Cast:
 </ul>
 
 Categories:
-<ul>
+<p>
 [% FOR c IN categories %]
-<li><a href="../category/$c.id-$c.name">$c.name</a></li>
+&middot; <a href="../category/$c.id-$c.name">$c.name</a>
 [% END %]
-</ul>
+&middot; </p>

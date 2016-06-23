@@ -7,10 +7,12 @@ use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
 use DBD::Pg;
 use Template;
 
+binmode STDOUT, ':encoding(UTF-8)';
+
 my $directory = readlink ($0) || $0;
 $directory =~ s!/[^/]+$!!;
 
-my $dbh = DBI->connect("dbi:Pg:dbname=omdb", '', '',
+my $dbh = DBI->connect("dbi:Pg:dbname=omdb client_encoding=UTF-8", '', '',
 	{ AutoCommit => 0, RaiseError => 1, PrintError => 0 });
 
 # create Template object
@@ -52,6 +54,15 @@ sub selectall_hashrows
 	return \@rows;
 }
 
+sub process
+{
+	my ($t, $vars) = @_;
+	my $output;
+	$template->process ($t, $vars, \$output)
+		|| die $template->error();
+	print $output;
+}
+
 if ($path =~ m!^/movie/(\d+)!) {
 	my $movie_id = $1;
 
@@ -66,7 +77,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 	my $cast = selectall_hashrows("SELECT *, p.name AS person_name, j.name AS job_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.movie_id = ? ORDER BY c.position, j.name, p.name", $movie_id);
 
-	$template->process('movie', {
+	process('movie', {
 		title => "$movie->{name} ($movie->{kind})",
 		movie => $movie,
 		movie_details =>
@@ -77,8 +88,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 		episodes => $episodes,
 		cast => $cast,
 		categories =>
-			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_categories m ON (c.id = m.category_id) WHERE m.movie_id = ?", $movie_id),
-	}) || die $template->error();
+			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_categories m ON (c.id = m.category_id) WHERE m.movie_id = ? ORDER BY c.name", $movie_id),
+	});
 
 } elsif ($path =~ m!^/person/(\d+)!) {
 	my $person_id = $1;
@@ -88,11 +99,11 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 	my $movies = selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date", $person_id);
 
-	$template->process('person', {
+	process('person', {
 		title => "$person->{name}",
 		person => $person,
 		movies => $movies,
-	}) || die $template->error();
+	});
 
 } elsif ($path =~ m!^/category/(\d+)!) {
 	my $category_id = $1;
@@ -100,11 +111,11 @@ if ($path =~ m!^/movie/(\d+)!) {
 	my $category = $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category_id)
 		or error ("Category ID $category_id is unknown");
 
-	$template->process('category', {
+	process('category', {
 		title => "$category->{name}",
 		category => $category,
 		movies => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_categories c ON (m.id = c.movie_id) WHERE c.category_id = ? ORDER BY m.date", $category_id),
-	}) || die $template->error();
+	});
 
 } else {
 	print "<pre>";
