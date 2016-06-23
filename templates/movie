@@ -1,5 +1,5 @@
 <ul>
-<li>Date: $movie.date</li>
+[% IF movie.date %]<li>Date: $movie.date</li>[% END %]
 [% IF movie_details.runtime %]<li>Runtime: ${movie_details.runtime} min</li>[% END %]
 [% IF movie_details.budget %]<li>Budget: $movie_details.budget</li>[% END %]
 [% IF movie_details.revenue %]<li>Revenue: $movie_details.revenue</li>[% END %]
@@ -7,9 +7,16 @@
 [% IF votes %]<li>Votes: $votes.vote_average ($votes.votes_count votes)</li>[% END %]
 [% IF series %]<li>Part of series: <a href="$series.id-$series.name">$series.name</a></li> [% END %]
 [% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a></li> [% END %]
+[% IF countries.0 %]
 <li>Countries:
 [% FOR r IN countries %]<a href="../country/$r">$r</a> [% END %]
 </li>
+[% END %]
+[% IF languages.0 %]
+<li>Languages:
+[% FOR r IN languages %]<a href="../language/$r">$r</a> [% END %]
+</li>
+[% END %]
 </ul>
 
 [% IF child_movies.0 %]
@@ -47,6 +54,7 @@ Trailers:
 </ul>
 [% END %]
 
+[% IF cast.0 %]
 Cast:
 <ul>
 [% FOR c IN cast %]
@@ -55,6 +63,7 @@ Cast:
   (<a href="../job/$c.id-$c.job_name">$c.job_name</a>)</li>
 [% END %]
 </ul>
+[% END %]
 
 [% IF references_to.0 OR references_from.0 %]
 References:
@@ -77,9 +86,11 @@ Links:
 </ul>
 [% END %]
 
+[% IF categories.0 %]
 Categories:
 <p>
 [% FOR c IN categories %]
 &middot; <a href="../category/$c.id-$c.name">$c.name</a>
 [% END %]
 &middot; </p>
+[% END %]

@@ -89,6 +89,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 		parent => $parent,
 		child_movies => $child_movies,
 		episodes => $episodes,
+		languages =>
+			$dbh->selectcol_arrayref("SELECT language FROM movie_languages WHERE movie_id = ?", undef, $movie_id),
 		countries =>
 			$dbh->selectcol_arrayref("SELECT country FROM movie_countries WHERE movie_id = ?", undef, $movie_id),
 		abstract_de =>
@@ -153,6 +155,14 @@ if ($path =~ m!^/movie/(\d+)!) {
 		movies => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_countries c ON (m.id = c.movie_id) WHERE c.country = ? ORDER BY m.date", $country),
 	});
 
+} elsif ($path =~ m!^/language/(\w+)!) {
+	my $language = $1;
+
+	process('language', {
+		title => "Movies in $language",
+		movies => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_languages l ON (m.id = l.movie_id) WHERE l.language = ? ORDER BY m.date", $language),
+	});
+
 } elsif ($path =~ m!^/job/(\d+)!) {
 	my $job_id = $1;
 
@@ -161,7 +171,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 	process('job', {
 		title => "$job->{name}",
-		people => selectall_hashrows("SELECT person_id, p.name, COUNT(*) FROM people p JOIN casts c ON (p.id = c.person_id) WHERE c.job_id = ? GROUP BY person_id, p.name ORDER BY p.name LIMIT 10000", $job_id),
+		people => selectall_hashrows("SELECT p.id, p.name, COUNT(*) FROM people p JOIN casts c ON (p.id = c.person_id) WHERE c.job_id = ? GROUP BY p.id, p.name ORDER BY p.name LIMIT 10000", $job_id),
 	});
 
 } elsif ($path =~ m!^/?$!) {
