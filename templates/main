@@ -1,0 +1,14 @@
+
+Movies:
+<ul>
+[% FOR m IN movies %]
+<li><a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind, $m.date)</li>
+[% END %]
+</ul>
+
+People:
+<ul>
+[% FOR p IN people %]
+<li><a href="$script_name/person/$p.id-$p.name">$p.name</a></li>
+[% END %]
+</ul>

@@ -1,0 +1,6 @@
+Movies from this country:
+<ul>
+[% FOR m IN movies %]
+<li><a href="../movie/$m.id-$m.name">$m.name</a> ($m.date)</li>
+[% END %]
+</ul>

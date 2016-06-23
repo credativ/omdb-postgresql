@@ -4,8 +4,12 @@
 [% IF movie_details.budget %]<li>Budget: $movie_details.budget</li>[% END %]
 [% IF movie_details.revenue %]<li>Revenue: $movie_details.revenue</li>[% END %]
 [% IF movie_details.homepage %]<li>Homepage: <a href="$movie_details.homepage">$movie_details.homepage</a></li>[% END %]
+[% IF votes %]<li>Votes: $votes.vote_average ($votes.votes_count votes)</li>[% END %]
 [% IF series %]<li>Part of series: <a href="$series.id-$series.name">$series.name</a></li> [% END %]
 [% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a></li> [% END %]
+<li>Countries:
+[% FOR r IN countries %]<a href="../country/$r">$r</a> [% END %]
+</li>
 </ul>
 
 [% IF child_movies.0 %]
@@ -26,12 +30,50 @@ Episodes:
 </ul>
 [% END %]
 
+[% IF abstract_de %]
+<p><b>Beschreibung</b>: <em>$abstract_de.abstract</em></p>
+[% END %]
+
+[% IF abstract_en %]
+<p><b>Description</b>: <em>$abstract_en.abstract</em></p>
+[% END %]
+
+[% IF trailers.0 %]
+Trailers:
+<ul>
+[% FOR r IN trailers %]
+<li><a href="https://www.youtube.com/watch?v=$r.key">$r.key</a> ($r.language)</li>
+[% END %]
+</ul>
+[% END %]
+
 Cast:
 <ul>
 [% FOR c IN cast %]
-<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a> ($c.job_name)</li>
+<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a> (<a href="../job/$c.id-$c.job_name">$c.job_name</a>)</li>
 [% END %]
 </ul>
+
+[% IF references_to.0 OR references_from.0 %]
+References:
+<ul>
+[% FOR r IN references_to %]
+<li>This title is a $r.type of <a href="$r.referenced_id-$r.name">$r.name</a> ($r.date)</li>
+[% END %]
+[% FOR r IN references_from %]
+<li><a href="$r.movie_id-$r.name">$r.name</a> ($r.date) is a $r.type of this title</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF links.0 %]
+Links:
+<ul>
+[% FOR r IN links %]
+<li>$r.source: $r.key ($r.language)</li>
+[% END %]
+</ul>
+[% END %]
 
 Categories:
 <p>

@@ -1,0 +1,5 @@
+<ul>
+[% FOR p IN people %]
+<li><a href="../person/$p.id-$p.name">$p.name</a>[% IF p.count > 1 %] ($p.count)[% END %]</li>
+[% END %]
+</ul>
