@@ -123,6 +123,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('person', {
 		title => "$person->{name}",
 		person => $person,
+		aliases =>
+			$dbh->selectcol_arrayref("SELECT name FROM people_aliases WHERE person_id = ?", undef, $person_id),
 		movies => $movies,
 		links =>
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
@@ -172,7 +174,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 		or error ("Job ID $job_id is unknown");
 
 	process('job', {
-		title => "$job->{name}",
+		title => "$job->{name} (Job title)",
 		people => selectall_hashrows("SELECT p.id, p.name, COUNT(*) FROM people p JOIN casts c ON (p.id = c.person_id) WHERE c.job_id = ? GROUP BY p.id, p.name ORDER BY p.name LIMIT 10000", $job_id),
 	});
 
@@ -184,7 +186,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 	});
 
 } elsif ($path =~ m!^/search!) {
-	my $query = $q->param('q') || 'Sinatra'; # shows up in movies, people, and characters
+	my $query = $q->param('q') || 'Hitchcock'; # shows up in movies, people, and characters
 
 	process('search', {
 		title => "OMDB Search: $query",
