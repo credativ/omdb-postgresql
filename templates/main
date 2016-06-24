@@ -1,7 +1,7 @@
 10 random movies:
 <ul>
 [% FOR m IN movies %]
-<li><a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind, $m.date)</li>
+<li>[% INCLUDE movie %]</li>
 [% END %]
 </ul>
 

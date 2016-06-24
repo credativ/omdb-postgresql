@@ -19,11 +19,19 @@
 [% END %]
 </ul>
 
+[% IF abstract_de %]
+<p><b>Beschreibung</b>: <em>$abstract_de.abstract</em></p>
+[% END %]
+
+[% IF abstract_en %]
+<p><b>Description</b>: <em>$abstract_en.abstract</em></p>
+[% END %]
+
 [% IF child_movies.0 %]
 Child movies:
 <ul>
-[% FOR c IN child_movies %]
-<li><a href="$c.id-$c.name">$c.name</a> ($c.kind)</li>
+[% FOR m IN child_movies %]
+<li>[% INCLUDE movie %]</li>
 [% END %]
 </ul>
 [% END %]
@@ -31,18 +39,10 @@ Child movies:
 [% IF episodes.0 %]
 Episodes:
 <ul>
-[% FOR e IN episodes %]
-<li><a href="$e.id-$e.name">$e.name</a> ($e.kind)</li>
+[% FOR m IN episodes %]
+<li>[% INCLUDE movie %]</li>
 [% END %]
 </ul>
-[% END %]
-
-[% IF abstract_de %]
-<p><b>Beschreibung</b>: <em>$abstract_de.abstract</em></p>
-[% END %]
-
-[% IF abstract_en %]
-<p><b>Description</b>: <em>$abstract_en.abstract</em></p>
 [% END %]
 
 [% IF trailers.0 %]

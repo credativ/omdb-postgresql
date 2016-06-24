@@ -1,8 +1,8 @@
 [% IF movies.0 %]
 Movies:
 <ul>
-[% FOR r IN movies %]
-<li><a href="movie/$r.id-$r.name">$r.name</a> ($r.kind, $r.date)</li>
+[% FOR m IN movies %]
+<li>[% INCLUDE movie %]</li>
 [% END %]
 </ul>
 [% END %]

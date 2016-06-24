@@ -5,3 +5,7 @@
 </head>
 <body>
 <h1>$title</h1>
+
+[% BLOCK movie %]
+<a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind[% IF m.date %], $m.date[% END %])
+[% END %]

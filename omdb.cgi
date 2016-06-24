@@ -58,6 +58,8 @@ sub selectall_hashrows
 sub process
 {
 	my ($t, $vars) = @_;
+	$vars->{script_name} = $ENV{SCRIPT_NAME};
+
 	my $output;
 	$template->process ($t, $vars, \$output)
 		|| die $template->error();
@@ -177,7 +179,6 @@ if ($path =~ m!^/movie/(\d+)!) {
 } elsif ($path =~ m!^/?$!) {
 	process('main', {
 		title => "OMDB",
-		script_name => $ENV{SCRIPT_NAME},
 		movies => selectall_hashrows("SELECT * FROM movies p ORDER BY random() LIMIT 10"),
 		people => selectall_hashrows("SELECT * FROM people p ORDER BY random() LIMIT 10"),
 	});
