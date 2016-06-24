@@ -113,7 +113,7 @@ CREATE TYPE iso639 AS ENUM (
 'vi',
 'wo',
 'xh',
-'xx',
+'xx', -- used instead of NULL
 'yi',
 'zh',
 'zu');

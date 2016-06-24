@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE movies (id bigint, name text, parent_id bigint, date date, series_id bigint DEFAULT NULL, kind text);
+CREATE TABLE movies (id bigint, name text, parent_id bigint, date date, series_id bigint DEFAULT NULL, kind kind);
 CREATE TABLE people (id bigint, name text, birthday date, deathday date, gender int);
 CREATE TABLE people_aliases (person_id bigint, name text);
 CREATE TABLE people_links (source text, key text, person_id bigint, language iso639);
