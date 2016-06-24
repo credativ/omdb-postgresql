@@ -83,10 +83,6 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('movie', {
 		title => "$movie->{name} ($movie->{kind})",
 		movie => $movie,
-		movie_details =>
-			$dbh->selectrow_hashref("SELECT * FROM movie_details WHERE movie_id = ?", undef, $movie_id),
-		votes =>
-			$dbh->selectrow_hashref("SELECT * FROM votes WHERE movie_id = ?", undef, $movie_id),
 		series => $series,
 		parent => $parent,
 		child_movies => $child_movies,
