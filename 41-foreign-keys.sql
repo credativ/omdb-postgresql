@@ -15,10 +15,8 @@ ALTER TABLE movie_keywords     ADD FOREIGN KEY (movie_id) REFERENCES movies (id)
 ALTER TABLE trailers           ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
 ALTER TABLE movie_links        ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
 ALTER TABLE movie_aliases_iso  ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
-ALTER TABLE votes              ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
 ALTER TABLE movie_languages    ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
 ALTER TABLE movie_countries    ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
-ALTER TABLE movie_details      ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
 ALTER TABLE movie_references   ADD FOREIGN KEY (movie_id) REFERENCES movies (id),
                                ADD FOREIGN KEY (referenced_id) REFERENCES movies (id);
 ALTER TABLE movie_abstracts_de ADD FOREIGN KEY (movie_id) REFERENCES movies (id);
