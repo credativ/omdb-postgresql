@@ -12,6 +12,7 @@ VACUUM;
 \i 41-foreign-keys.sql
 ANALYZE;
 
+CREATE EXTENSION IF NOT EXISTS tsm_system_rows;
 DO $$ BEGIN
   CREATE USER "www-data";
 EXCEPTION WHEN duplicate_object THEN

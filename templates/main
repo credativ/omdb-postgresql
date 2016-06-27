@@ -12,6 +12,13 @@
 [% END %]
 </ul>
 
+10 random characters:
+<ul>
+[% FOR c IN characters %]
+<li><a href="$script_name/character/$c.role">$c.role</a></li>
+[% END %]
+</ul>
+
 Search:
 <form action="$script_name/search" method="GET">
 <input name="q" size="40">
