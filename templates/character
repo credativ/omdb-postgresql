@@ -4,6 +4,6 @@ The character <em>$character</em> appears in these movies:
 [% FOR c IN cast %]
 <li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a>
   in
-  <a href="../movie/$c.movie_id-$c.movie_name">$c.movie_name</a> ($c.date)</li>
+  <a href="../movie/$c.movie_id-$c.movie_name">$c.movie_name</a> ($c.kind, $c.date)</li>
 [% END %]
 </ul>
