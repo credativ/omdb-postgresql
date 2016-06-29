@@ -61,6 +61,8 @@ sub process
 {
 	my ($t, $vars) = @_;
 	$vars->{script_name} = $ENV{SCRIPT_NAME};
+	my $time_end=gettimeofday;
+	$vars->{time} = sprintf ("%.2fms", ($time_end - $time_start) * 1000);
 
 	my $output;
 	$template->process ($t, $vars, \$output)
@@ -203,5 +205,3 @@ if ($path =~ m!^/movie/(\d+)!) {
 	print "</pre>";
 	error ("404 - Path $path unknown");
 }
-my $time_end=gettimeofday;
-print "<font size='-1'>Page Generated in ".sprintf("%.2f",(($time_end-$time_start)*1000))."ms</font>";
