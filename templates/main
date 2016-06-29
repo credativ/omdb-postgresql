@@ -1,3 +1,9 @@
+Search:
+<form action="$script_name/search" method="GET">
+<input name="q" size="40">
+<input type="submit">
+</form>
+
 10 random movies:
 <ul>
 [% FOR m IN movies %]
@@ -19,8 +25,3 @@
 [% END %]
 </ul>
 
-Search:
-<form action="$script_name/search" method="GET">
-<input name="q" size="40">
-<input type="submit">
-</form>
