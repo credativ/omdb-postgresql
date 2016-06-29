@@ -12,6 +12,14 @@ Also known as:
 </ul>
 [% END %]
 
+Top 5 Colleagues:
+<ul>
+[% FOR p IN partners %]
+<li><a href="../person/$p.id - $p.name">.. and $p.name shared $p.partnerships Movies</a></li>
+[% END %]
+</ul>
+
+
 Movies:
 <ul>
 [% FOR m IN movies %]
