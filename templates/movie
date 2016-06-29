@@ -1,4 +1,4 @@
-<ul class='movie'>
+<ul>
 [% IF movie.date %]<li>Date: $movie.date</li>[% END %]
 [% IF movie.runtime %]<li>Runtime: ${movie.runtime} min</li>[% END %]
 [% IF movie.budget %]<li>Budget: $movie.budget</li>[% END %]
