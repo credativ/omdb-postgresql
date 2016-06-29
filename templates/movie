@@ -94,3 +94,12 @@ Categories:
 [% END %]
 &middot; </p>
 [% END %]
+
+[% IF keywords.0 %]
+Keywords:
+<p>
+[% FOR c IN keywords %]
+&middot; <a href="../category/$c.id-$c.name">$c.name</a>
+[% END %]
+&middot; </p>
+[% END %]

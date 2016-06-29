@@ -108,6 +108,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 			selectall_hashrows("SELECT * FROM movie_links WHERE movie_id = ? ORDER BY source, key, language", $movie_id),
 		categories =>
 			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_categories m ON (c.id = m.category_id) WHERE m.movie_id = ? ORDER BY c.name", $movie_id),
+		keywords =>
+			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_keywords m ON (c.id = m.category_id) WHERE m.movie_id = ? ORDER BY c.name", $movie_id),
 	});
 
 } elsif ($path =~ m!^/person/(\d+)!) {
@@ -146,7 +148,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('category', {
 		title => "$category->{name}",
 		category => $category,
-		movies => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_categories c ON (m.id = c.movie_id) WHERE c.category_id = ? ORDER BY m.date", $category_id),
+		movies_cat => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_categories c ON (m.id = c.movie_id) WHERE c.category_id = ? ORDER BY m.date", $category_id),
+		movies_keyw => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_keywords k ON (m.id = k.movie_id) WHERE k.category_id = ? ORDER BY m.date", $category_id),
 	});
 
 } elsif ($path =~ m!^/country/(\w+)!) {

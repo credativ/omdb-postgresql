@@ -1,6 +1,17 @@
+[% IF movies_cat.0 %]
 Movies in this category:
 <ul>
-[% FOR m IN movies %]
+[% FOR m IN movies_cat %]
 <li>[% INCLUDE movie %]</li>
 [% END %]
 </ul>
+[% END %]
+
+[% IF movies_keyw.0 %]
+Movies with this keyword:
+<ul>
+[% FOR m IN movies_keyw %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>
+[% END %]
