@@ -122,6 +122,11 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 	my $movies = selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date", $person_id);
 
+	my $partners = selectall_hashrows("SELECT p.id,p.name, count(*) Partnerships FROM casts c1 JOIN casts c2 ON c2.movie_id = c1.movie_id JOIN people p ON c2.person_id = p.id WHERE c1.person_id=? AND c2.person_id != ? GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 5;", ($person_id, $person_id) );
+
+
+
+
 	process('person', {
 		title => "$person->{name}",
 		person => $person,
@@ -130,6 +135,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 		movies => $movies,
 		links =>
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
+		partners => $partners,
 	});
 
 } elsif ($path =~ m!^/character/(.+)!) { # plain text
