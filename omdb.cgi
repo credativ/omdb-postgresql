@@ -7,12 +7,15 @@ use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
 use DBD::Pg;
 use Encode;
 use Template;
+use Time::HiRes qw(gettimeofday);
 
 binmode STDOUT, ':encoding(UTF-8)';
+
 
 my $directory = readlink ($0) || $0;
 $directory =~ s!/[^/]+$!!;
 
+my $time_start=gettimeofday;
 my $dbh = DBI->connect("dbi:Pg:dbname=omdb client_encoding=UTF-8", '', '',
 	{ AutoCommit => 0, RaiseError => 1, PrintError => 0 });
 
@@ -33,7 +36,6 @@ print $q->header(
 	-type => 'text/html',
 	-charset => 'utf-8',
 );
-
 sub error ($)
 {
 	my $error = shift;
@@ -198,3 +200,5 @@ if ($path =~ m!^/movie/(\d+)!) {
 	print "</pre>";
 	error ("404 - Path $path unknown");
 }
+my $time_end=gettimeofday;
+print "<font size='-1'>Page Generated in ".sprintf("%.2f",(($time_end-$time_start)*1000))."ms</font>";

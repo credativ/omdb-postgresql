@@ -7,46 +7,53 @@ body {
 	background-color:#efefef;
 }
 a {
-color:#121212;
-transition: 0.4s all;
+	color:#121212;
+	transition: 0.4s all;
 }
 h1{
-color:#ff0000;
+	color:#ff0000;
 }
 a:hover {
-color:#ff0000;
-transition: 0.2s all;
+	color:#ff0000;
+	transition: 0.2s all;
 }
 
-
-
-ul{
-# color: #ff0000;
-}
 #main{
-padding: 10px;
-background-color:#dedede;
-margin-left:auto;
-margin-right:auto;
-width:800px;
+	padding: 10px;
+	background-color:#dedede;
+	margin-left:auto;
+	margin-right:auto;
+	width:800px;
 }
+
 img.logo{
-float:right;
-width: 45px;
-height:50px;
-align:right;
-transition: 15s all;
+	float:right;
+	width: 45px;
+	height:50px;
+	align:right;
+	transition: 0.3s all;
+	transform: rotate(30deg);
+	transition-timing-function: ease-in-out;
+	opacity:0.7;
+	transition-delay:3s;
 }
 img.logo:hover{
-transform: rotate(4000deg);
-transition: 5s all;
-
+	opacity:1;
+	transition-timing-function: ease-in-out;
+	transform: rotate(0deg);
+	transition: 0.3s all;
 }
 </style>
 
 </head>
 <body><div id='main'>
-<a href="https://www.credativ.de"><img src="http://www.credativ.co.uk/sites/credativ.co.uk/files/media/logo_with_credativ.png" class="logo"\></a>
+<a href="" id="uplink" style="float:left"> > Home</a>
+<script>
+if (window.location.href.match(/omdb\/[^]+/) != null){
+	document.getElementById("uplink").href="..";
+}
+</script>
+<a href="https://www.credativ.de" target="blank" ><img src="http://www.credativ.co.uk/sites/credativ.co.uk/files/media/logo_with_credativ.png" class="logo" alt="credativ GmbH" title="Open Source for Business"\></a>
 <h1>$title</h1>
 
 [% BLOCK movie %]
