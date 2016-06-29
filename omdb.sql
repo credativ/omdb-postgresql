@@ -11,6 +11,7 @@ VACUUM;
 VACUUM;
 \i 41-foreign-keys.sql
 ANALYZE;
+\i 50-views.sql
 
 CREATE EXTENSION IF NOT EXISTS tsm_system_rows;
 DO $$ BEGIN
