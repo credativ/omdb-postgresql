@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 
+# Copyright (C) 2016 credativ GmbH <info@credativ.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
 use strict;
 use warnings;
 use CGI;
@@ -189,7 +201,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 } elsif ($path =~ m!^/?$!) {
 	process('main', {
-		title => "OMDB",
+		title => "omdb",
 		movies => selectall_hashrows("SELECT * FROM movies TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 		people => selectall_hashrows("SELECT * FROM people TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 		characters => selectall_hashrows("SELECT * FROM casts TABLESAMPLE system_rows(1000) WHERE role IS NOT NULL AND role NOT IN ('', '-') ORDER BY random() LIMIT 10"),
@@ -199,7 +211,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 	my $query = $q->param('q') || 'Hitchcock'; # shows up in movies, people, and characters
 
 	process('search', {
-		title => "OMDB Search: $query",
+		title => "Search results: $query",
 		movies => selectall_hashrows("SELECT * FROM movies m WHERE name ILIKE ? ORDER BY m.date, m.name", "%$query%"),
 		people => selectall_hashrows("SELECT * FROM people p WHERE name ILIKE ? ORDER BY p.name", "%$query%"),
 		characters => selectall_hashrows("SELECT *, p.name AS person_name, m.name AS movie_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN movies m ON (c.movie_id = m.id) WHERE c.role ILIKE ? ORDER BY m.date", "%$query%"),
