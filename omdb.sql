@@ -13,6 +13,8 @@ VACUUM;
 ANALYZE;
 \i 50-views.sql
 
+\i 51-purge_dirty.sql
+
 CREATE EXTENSION IF NOT EXISTS tsm_system_rows;
 DO $$ BEGIN
   CREATE USER "www-data";
