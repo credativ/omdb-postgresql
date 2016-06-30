@@ -1,8 +1,9 @@
-Search:
+<p>
 <form action="$script_name/search" method="GET">
 <input name="q" size="40">
-<input type="submit">
+<input type="submit" value="Search omdb">
 </form>
+</p>
 
 10 random movies:
 <ul>
