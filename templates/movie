@@ -81,7 +81,19 @@ References:
 Links:
 <ul>
 [% FOR r IN links %]
-<li>$r.source: $r.key ($r.language)</li>
+<li>
+  [% IF r.source == "amazon" %]
+    <a href="https://www.amazon.de/s/ref=nb_sb_noss?field-keywords=$r.key">Amazon: $r.key</a> ($r.language)
+  [% ELSIF r.source == "imdbmovie" OR r.source == "imdbepisode" %]
+    <a href="http://www.imdb.com/title/$r.key/">IMDB: $r.key</a>
+  [% ELSIF r.source == "wikidata" %]
+    <a href="https://www.wikidata.org/wiki/$r.key">Wikidata: $r.key</a>
+  [% ELSIF r.source == "wikipedia" %]
+    <a href="https://${r.language}.wikipedia.org/wiki/$r.key">Wikipedia: $r.key</a> ($r.language)
+  [% ELSE %]
+    $r.source: $r.key ($r.language)
+  [% END %]
+</li>
 [% END %]
 </ul>
 [% END %]
