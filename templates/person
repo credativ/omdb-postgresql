@@ -1,24 +1,24 @@
-<ul>
-[% IF person.birthday %]<li>Born: $person.birthday</li>[% END %]
-[% IF person.deathday %]<li>Died: $person.deathday</li>[% END %]
-</ul>
+<p><em>
+[% IF person.birthday %] * $person.birthday [% END %]
+[% IF person.deathday %] &dagger; $person.deathday [% END %]
+</em>
+</p>
 
 [% IF aliases.0 %]
+<p>
 Also known as:
-<ul>
 [% FOR a IN aliases %]
-<li>$a</li>
+$a[% IF NOT loop.last %], [% END %]
 [% END %]
-</ul>
+</p>
 [% END %]
 
-Top 5 Colleagues:
+Top 5 colleagues:
 <ul>
 [% FOR p IN partners %]
-<li><a href="../person/$p.id - $p.name">.. and $p.name shared $p.partnerships Movies</a></li>
+<li>$p.partnerships movies shared with <a href="../person/$p.id-$p.name">$p.name</a></li>
 [% END %]
 </ul>
-
 
 Movies:
 <ul>
