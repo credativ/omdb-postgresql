@@ -13,6 +13,15 @@ $a[% INCLUDE comma %]
 </p>
 [% END %]
 
+[% IF images.0 %]
+Images:
+<ul>
+[% FOR i IN images %]
+<li><a href="$i.source">$i.source</a> [% IF i.author %]($i.author)[% END %]</li>
+[% END %]
+</ul>
+[% END %]
+
 Top 5 colleagues:
 <ul>
 [% FOR p IN partners %]

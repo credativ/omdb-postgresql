@@ -108,6 +108,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_de WHERE movie_id = ?", undef, $movie_id),
 		abstract_en =>
 			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_en WHERE movie_id = ?", undef, $movie_id),
+		images =>
+			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Movie'", $movie_id),
 		trailers =>
 			selectall_hashrows("SELECT * FROM trailers WHERE movie_id = ? ORDER BY language, trailer_id", $movie_id),
 		cast =>
@@ -134,8 +136,10 @@ if ($path =~ m!^/movie/(\d+)!) {
 		person => $person,
 		aliases =>
 			$dbh->selectcol_arrayref("SELECT name FROM people_aliases WHERE person_id = ?", undef, $person_id),
+		images =>
+			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Person'", $person_id),
 		movies =>
-			selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date", $person_id),
+			selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date, j.name", $person_id),
 		links =>
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
 		partners =>
@@ -159,6 +163,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('category', {
 		title => "$category->{name}",
 		category => $category,
+		images =>
+			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Category'", $category_id),
 		movies_cat => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_categories c ON (m.id = c.movie_id) WHERE c.category_id = ? ORDER BY m.date", $category_id),
 		movies_keyw => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_keywords k ON (m.id = k.movie_id) WHERE k.category_id = ? ORDER BY m.date", $category_id),
 	});
@@ -195,6 +201,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 		movies => selectall_hashrows("SELECT * FROM movies TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 		people => selectall_hashrows("SELECT * FROM people TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 		characters => selectall_hashrows("SELECT * FROM casts TABLESAMPLE system_rows(1000) WHERE role IS NOT NULL AND role NOT IN ('', '-') ORDER BY random() LIMIT 10"),
+		categories => selectall_hashrows("SELECT * FROM categories TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 	});
 
 } elsif ($path =~ m!^/search!) {

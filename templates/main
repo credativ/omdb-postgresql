@@ -26,6 +26,13 @@
 [% END %]
 </ul>
 
+10 random keywords:
+<ul>
+[% FOR c IN categories %]
+<li><a href="$script_name/category/$c.id-$c.name">$c.name</a></li>
+[% END %]
+</ul>
+
 <h2>About omdb</h2>
 
 <p>
