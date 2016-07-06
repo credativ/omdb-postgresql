@@ -26,3 +26,12 @@ Characters:
 [% END %]
 </ul>
 [% END %]
+
+[% IF categories.0 %]
+Categories:
+<ul>
+[% FOR c IN categories %]
+<li><a href="category/$c.id-$c.name">$c.name</a></li>
+[% END %]
+</ul>
+[% END %]
