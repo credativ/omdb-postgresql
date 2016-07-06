@@ -90,6 +90,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('movie', {
 		title => "$movie->{name} ($movie->{kind})",
 		movie => $movie,
+		aliases =>
+			selectall_hashrows("SELECT * FROM movie_aliases_iso WHERE movie_id = ? ORDER BY language, official_translation DESC, name", $movie_id),
 		series => $movie->{series_id} &&
 			$dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie->{series_id}),
 		parent => $movie->{parent_id} &&

@@ -8,7 +8,7 @@
 <p>
 Also known as:
 [% FOR a IN aliases %]
-$a[% IF NOT loop.last %], [% END %]
+$a[% INCLUDE comma %]
 [% END %]
 </p>
 [% END %]

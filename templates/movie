@@ -9,13 +9,20 @@
 [% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a></li> [% END %]
 [% IF countries.0 %]
 <li>Countries:
-[% FOR r IN countries %]<a href="../country/$r">$r</a> [% END %]
+[% FOR r IN countries %]<a href="../country/$r">$r</a>[% INCLUDE comma %][% END %]
 </li>
 [% END %]
 [% IF languages.0 %]
 <li>Languages:
-[% FOR r IN languages %]<a href="../language/$r">$r</a> [% END %]
+[% FOR r IN languages %]<a href="../language/$r">$r</a>[% INCLUDE comma %][% END %]
 </li>
+[% END %]
+[% IF aliases.0 %]
+  <li>Other titles:
+  [% FOR a IN aliases %]
+  <em>$a.name</em> ($a.language[% IF a.official_translation %], official[% END %])[% INCLUDE comma %]
+  [% END %]
+  </li>
 [% END %]
 </ul>
 
