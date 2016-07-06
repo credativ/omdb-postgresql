@@ -84,25 +84,20 @@ sub process
 
 if ($path =~ m!^/movie/(\d+)!) {
 	my $movie_id = $1;
-
 	my $movie = $dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie_id)
 		or error ("Movie ID $movie_id is unknown");
-	my $series = $movie->{series_id} &&
-		$dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie->{series_id});
-	my $parent = $movie->{parent_id} &&
-		$dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie->{parent_id});
-	my $child_movies = selectall_hashrows("SELECT * FROM movies WHERE parent_id = ? ORDER BY date", $movie_id);
-	my $episodes = selectall_hashrows("SELECT * FROM movies WHERE series_id = ? ORDER BY date", $movie_id);
-
-	my $cast = selectall_hashrows("SELECT *, p.name AS person_name, j.name AS job_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.movie_id = ? ORDER BY c.position, j.name, p.name", $movie_id);
 
 	process('movie', {
 		title => "$movie->{name} ($movie->{kind})",
 		movie => $movie,
-		series => $series,
-		parent => $parent,
-		child_movies => $child_movies,
-		episodes => $episodes,
+		series => $movie->{series_id} &&
+			$dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie->{series_id}),
+		parent => $movie->{parent_id} &&
+			$dbh->selectrow_hashref("SELECT * FROM movies WHERE id = ?", undef, $movie->{parent_id}),
+		child_movies =>
+			selectall_hashrows("SELECT * FROM movies WHERE parent_id = ? ORDER BY date", $movie_id),
+		episodes =>
+			selectall_hashrows("SELECT * FROM movies WHERE series_id = ? ORDER BY date", $movie_id),
 		languages =>
 			$dbh->selectcol_arrayref("SELECT language FROM movie_languages WHERE movie_id = ?", undef, $movie_id),
 		countries =>
@@ -113,7 +108,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_en WHERE movie_id = ?", undef, $movie_id),
 		trailers =>
 			selectall_hashrows("SELECT * FROM trailers WHERE movie_id = ? ORDER BY language, trailer_id", $movie_id),
-		cast => $cast,
+		cast =>
+			selectall_hashrows("SELECT *, p.name AS person_name, j.name AS job_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.movie_id = ? ORDER BY c.position, j.name, p.name", $movie_id),
 		references_to =>
 			selectall_hashrows("SELECT * FROM movie_references r JOIN movies m ON (r.referenced_id = m.id) WHERE movie_id = ? ORDER BY type, date", $movie_id),
 		references_from =>
@@ -128,26 +124,20 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 } elsif ($path =~ m!^/person/(\d+)!) {
 	my $person_id = $1;
-
 	my $person = $dbh->selectrow_hashref("SELECT * FROM people WHERE id = ?", undef, $person_id)
 		or error ("Person ID $person_id is unknown");
-
-	my $movies = selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date", $person_id);
-
-	my $partners = selectall_hashrows("SELECT p.id,p.name, count(*) Partnerships FROM casts c1 JOIN casts c2 ON c2.movie_id = c1.movie_id JOIN people p ON c2.person_id = p.id WHERE c1.person_id=? AND c2.person_id != ? GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 5;", ($person_id, $person_id) );
-
-
-
 
 	process('person', {
 		title => "$person->{name}",
 		person => $person,
 		aliases =>
 			$dbh->selectcol_arrayref("SELECT name FROM people_aliases WHERE person_id = ?", undef, $person_id),
-		movies => $movies,
+		movies =>
+			selectall_hashrows("SELECT *, m.name AS movie_name, j.name AS job_name FROM movies m JOIN casts c ON (m.id = c.movie_id) JOIN jobs j ON (c.job_id = j.id) WHERE c.person_id = ? ORDER BY m.date", $person_id),
 		links =>
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
-		partners => $partners,
+		partners =>
+			selectall_hashrows("SELECT p.id,p.name, count(*) Partnerships FROM casts c1 JOIN casts c2 ON c2.movie_id = c1.movie_id JOIN people p ON c2.person_id = p.id WHERE c1.person_id=? AND c2.person_id != ? GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 5;", $person_id, $person_id),
 	});
 
 } elsif ($path =~ m!^/character/(.+)!) { # plain text
@@ -161,7 +151,6 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 } elsif ($path =~ m!^/category/(\d+)!) {
 	my $category_id = $1;
-
 	my $category = $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category_id)
 		or error ("Category ID $category_id is unknown");
 
@@ -190,7 +179,6 @@ if ($path =~ m!^/movie/(\d+)!) {
 
 } elsif ($path =~ m!^/job/(\d+)!) {
 	my $job_id = $1;
-
 	my $job = $dbh->selectrow_hashref("SELECT * FROM jobs WHERE id = ?", undef, $job_id)
 		or error ("Job ID $job_id is unknown");
 
