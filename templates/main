@@ -12,6 +12,13 @@
 [% END %]
 </ul>
 
+10 random series:
+<ul>
+[% FOR m IN series %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>
+
 10 random people:
 <ul>
 [% FOR p IN people %]

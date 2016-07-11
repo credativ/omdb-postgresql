@@ -198,7 +198,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 } elsif ($path =~ m!^/?$!) {
 	process('main', {
 		title => "omdb",
-		movies => selectall_hashrows("SELECT * FROM movies TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
+		movies => selectall_hashrows("SELECT * FROM movies TABLESAMPLE system_rows(1000) WHERE kind = 'movie' ORDER BY random() LIMIT 10"),
+		series => selectall_hashrows("SELECT * FROM movies TABLESAMPLE system_rows(1000) WHERE kind = 'series' ORDER BY random() LIMIT 10"),
 		people => selectall_hashrows("SELECT * FROM people TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
 		characters => selectall_hashrows("SELECT * FROM casts TABLESAMPLE system_rows(1000) WHERE role IS NOT NULL AND role NOT IN ('', '-') ORDER BY random() LIMIT 10"),
 		categories => selectall_hashrows("SELECT * FROM categories TABLESAMPLE system_rows(1000) ORDER BY random() LIMIT 10"),
