@@ -206,7 +206,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 	});
 
 } elsif ($path =~ m!^/search!) {
-	my $query = $q->param('q') || 'Hitchcock'; # shows up in movies, people, and characters
+	my $query = decode ('UTF-8', $q->param('q')) || 'Hitchcock'; # shows up in movies, people, and characters
 
 	process('search', {
 		title => "Search results: $query",
