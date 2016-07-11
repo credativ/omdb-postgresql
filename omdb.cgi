@@ -217,8 +217,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 	});
 
 } else {
-	print "<pre>";
-	print "$_: $ENV{$_}\n" foreach (sort keys %ENV);
-	print "</pre>";
+	#print "<pre>";
+	#print "$_: $ENV{$_}\n" foreach (sort keys %ENV);
+	#print "</pre>";
 	error ("404 - Path $path unknown");
 }
