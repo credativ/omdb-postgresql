@@ -32,7 +32,8 @@ FROM import_movies m
 
 \copy people                FROM PROGRAM 'bzcat www.omdb.org/data/all_people.csv.bz2'            WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy people_aliases        FROM PROGRAM 'bzcat www.omdb.org/data/all_people_aliases.csv.bz2'    WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
-\copy people_links          FROM PROGRAM 'bzcat www.omdb.org/data/people_links.csv.bz2'          WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
+-- people_links contains duplicates (2016-11-07)
+\copy people_links          FROM PROGRAM 'bzcat www.omdb.org/data/people_links.csv.bz2 | tail -n +2 | sort -u' WITH (FORMAT CSV, HEADER FALSE, NULL '\N', ESCAPE '\')
 \copy casts                 FROM PROGRAM 'bzcat www.omdb.org/data/all_casts.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy job_names             FROM PROGRAM 'bzcat www.omdb.org/data/job_names.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 INSERT INTO jobs SELECT job_id, name FROM job_names WHERE language = 'en';

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+sed -e '1,/sed/d' $0 | psql -X; exit
+
+CREATE DATABASE omdb;
+
+\c omdb
+\i omdb.sql
