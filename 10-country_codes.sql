@@ -148,6 +148,7 @@ CREATE TYPE country_code AS ENUM (
 'VE',
 'VI',
 'VN',
+'VU',
 'WS',
 'ZA',
 'ZW');
