@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright (C) 2016 credativ GmbH <info@credativ.de>
+# Copyright (C) 2016-2017 credativ GmbH <info@credativ.de>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -175,6 +175,14 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('country', {
 		title => "Movies from $country",
 		movies => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_countries c ON (m.id = c.movie_id) WHERE c.country = ? ORDER BY m.date", $country),
+	});
+
+} elsif ($path =~ m!^/date/(\w+-\w+-\w+)!) {
+	my $date = $1;
+
+	process('date', {
+		title => "Movies made around $date",
+		movies => selectall_hashrows('SELECT * FROM (SELECT * FROM movies WHERE date < $1 ORDER BY DATE DESC LIMIT 10) older UNION ALL SELECT * FROM movies WHERE date = $1 UNION ALL SELECT * FROM (SELECT * FROM movies WHERE date > $1 ORDER BY DATE LIMIT 10) newer', $date),
 	});
 
 } elsif ($path =~ m!^/language/(\w+)!) {

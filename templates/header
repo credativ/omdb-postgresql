@@ -51,7 +51,7 @@ img.logo:hover{
 <h1>$title</h1>
 
 [% BLOCK movie %]
-<a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind[% IF m.date %], $m.date[% END %])
+<a href="$script_name/movie/$m.id-$m.name">$m.name</a> ($m.kind[% IF m.date %], <a href="$script_name/date/$m.date">$m.date</a>[% END %])
 [% END %]
 
 [% BLOCK comma %]
