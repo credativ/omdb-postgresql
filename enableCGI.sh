@@ -12,7 +12,8 @@ fi
 
 apt-get install apache2 \
 	libcgi-pm-perl \
-	libdbd-pg-perl
+	libdbd-pg-perl \
+	libtemplate-perl 
 a2enmod cgi
 
 rm -f /usr/lib/cgi-bin/omdb
