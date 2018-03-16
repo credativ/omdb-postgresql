@@ -131,3 +131,10 @@ Keywords:
 [% END %]
 &middot; </p>
 [% END %]
+
+Movies with similar name:
+<ul>
+[% FOR m IN similar %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>

@@ -124,6 +124,8 @@ if ($path =~ m!^/movie/(\d+)!) {
 			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_categories m ON (c.id = m.category_id) WHERE m.movie_id = ? ORDER BY c.name", $movie_id),
 		keywords =>
 			selectall_hashrows("SELECT c.* FROM categories c JOIN movie_keywords m ON (c.id = m.category_id) WHERE m.movie_id = ? ORDER BY c.name", $movie_id),
+		similar =>
+			selectall_hashrows("SELECT * FROM movies WHERE id <> ? ORDER BY name <-> ? LIMIT 10", $movie_id, $movie->{name}),
 	});
 
 } elsif ($path =~ m!^/person/(\d+)!) {
