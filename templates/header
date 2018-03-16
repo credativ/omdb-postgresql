@@ -47,7 +47,7 @@ img.logo:hover{
 </head>
 <body><div id='main'>
 <a href="$script_name/" style="float:left; font-size:small;">&lt; Home</a>
-<a href="https://www.credativ.de" target="blank" ><img src="http://www.credativ.co.uk/sites/credativ.co.uk/files/media/logo_with_credativ.png" class="logo" alt="credativ GmbH" title="Open Source for Business"\></a>
+<a href="https://www.credativ.de" target="blank" ><img src="https://www.credativ.com/sites/default/files/styles/carousel_logo/public/CD_credativ.png" class="logo" alt="credativ GmbH" title="Open Source for Business"\></a>
 <h1>$title</h1>
 
 [% BLOCK movie %]
