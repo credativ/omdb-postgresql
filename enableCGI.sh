@@ -10,17 +10,26 @@ if ! test -f omdb.cgi; then
 	exit 1
 fi
 
+# install and configure apache2
 apt-get install apache2 \
 	libcgi-pm-perl \
 	libdbd-pg-perl \
-	libtemplate-perl 
+	libtemplate-perl
 a2enmod cgi
-
-rm -f /usr/lib/cgi-bin/omdb
-ln -s $PWD/omdb.cgi /usr/lib/cgi-bin/omdb
-
 sed -i -e 's/SymLinksIfOwnerMatch/FollowSymLinks/g' /etc/apache2/conf-available/serve-cgi-bin.conf
 
-service apache2 reload
+# restart apache (reloading is not enough on stretch)
+service apache2 restart
 
-echo "http://localhost/cgi-bin/omdb"
+# install CGI script
+rm -f /usr/lib/cgi-bin/omdb
+ln -s $PWD/omdb.cgi /usr/lib/cgi-bin/omdb
+chmod +x omdb.cgi
+
+cat <<EOF
+#######################################
+The OMDB CGI script has been installed:
+
+     http://localhost/cgi-bin/omdb
+#######################################
+EOF
