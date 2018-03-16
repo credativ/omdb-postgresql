@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright (C) 2016-2017 credativ GmbH <info@credativ.de>
+# Copyright (C) 2016-2018 credativ GmbH <info@credativ.de>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

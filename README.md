@@ -18,12 +18,10 @@ to a company or person but rather to the general public. omdb consciously stays
 away from commercial related information with an objective to provide a
 self-contained film database.
 
-Copyright
----------
+Copyright: Alle Textinformationen auf omdb.org unterliegen der Creative
+Commons-Lizenz (Namensnennung 2.0 Deutschland).
 
-Alle Textinformationen auf omdb.org unterliegen der Creative Commons-Lizenz
-(Namensnennung 2.0 Deutschland).
-
+http://www.omdb.org/content/Copyright
 https://creativecommons.org/licenses/by/2.0/de/
 
 About omdb-postgresql
@@ -32,7 +30,10 @@ About omdb-postgresql
 This database contains CSV data downloaded from http://www.omdb.org/content/Help:DataDownload,
 imported into a normalized PostgreSQL database schema. The data is basically
 unmodified, except for the removal of entries that would violate foreign key
-constraints.
+constraints. The database import script also removes some adult movies.
 
-This CGI script is developed independently from omdb, and licensed under the
-GNU GPL, version 2 or later.
+The database schema is intentionally not optimized (no indexes besides primary
+keys) in order to serve as a playground for database optimization.
+
+This CGI script is developed by credativ, independently from omdb, and licensed
+under the GNU GPL, version 2 or later.
