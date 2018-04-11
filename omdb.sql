@@ -22,3 +22,4 @@ DO $$ BEGIN
 EXCEPTION WHEN duplicate_object THEN
 END; $$ LANGUAGE plpgsql;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
+GRANT INSERT ON access_log TO "www-data";

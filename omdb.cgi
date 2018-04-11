@@ -74,12 +74,17 @@ sub process
 	my ($t, $vars) = @_;
 	$vars->{script_name} = $ENV{SCRIPT_NAME};
 	my $time_end=gettimeofday;
-	$vars->{time} = sprintf ("%.2fms", ($time_end - $time_start) * 1000);
+	my $runtime = $time_end - $time_start;
+	$vars->{time} = sprintf ("%.2fms", $runtime * 1000);
 
 	my $output;
 	$template->process ($t, $vars, \$output)
 		|| die $template->error();
 	print $output;
+
+	$dbh->do("INSERT INTO access_log (client_ip, page, path, runtime) VALUES (?, ?, ?, ?)", undef,
+		$ENV{REMOTE_ADDR}, $t, decode('UTF-8', $path), $runtime);
+	$dbh->commit;
 }
 
 if ($path =~ m!^/movie/(\d+)!) {
