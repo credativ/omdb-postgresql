@@ -150,7 +150,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 		links =>
 			selectall_hashrows("SELECT * FROM people_links WHERE person_id = ? ORDER BY source, key, language", $person_id),
 		partners =>
-			selectall_hashrows("SELECT p.id,p.name, count(DISTINCT c1.movie_id) Partnerships FROM casts c1 JOIN casts c2 ON c2.movie_id = c1.movie_id JOIN people p ON c2.person_id = p.id WHERE c1.person_id=? AND c2.person_id != ? GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 5;", $person_id, $person_id),
+			selectall_hashrows("SELECT p.id,p.name, count(DISTINCT c1.movie_id) Partnerships FROM casts c1 JOIN casts c2 ON c2.movie_id = c1.movie_id JOIN people p ON c2.person_id = p.id WHERE c1.person_id = ? AND c2.person_id != ? GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 5", $person_id, $person_id),
 	});
 
 } elsif ($path =~ m!^/character/(.+)!) { # plain text
