@@ -27,6 +27,8 @@ DROP TABLE IF EXISTS movie_countries CASCADE;
 DROP TABLE IF EXISTS movie_references CASCADE;
 DROP TABLE IF EXISTS movie_abstracts_de CASCADE;
 DROP TABLE IF EXISTS movie_abstracts_en CASCADE;
+DROP TABLE IF EXISTS movie_abstracts_fr CASCADE;
+DROP TABLE IF EXISTS movie_abstracts_es CASCADE;
 
 DROP TYPE IF EXISTS country_code;
 DROP TYPE IF EXISTS iso639;

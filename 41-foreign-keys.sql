@@ -21,6 +21,8 @@ ALTER TABLE movie_references   ADD FOREIGN KEY (movie_id) REFERENCES movies (id)
                                ADD FOREIGN KEY (referenced_id) REFERENCES movies (id) ON DELETE cascade;
 ALTER TABLE movie_abstracts_de ADD FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE cascade;
 ALTER TABLE movie_abstracts_en ADD FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE cascade;
+ALTER TABLE movie_abstracts_fr ADD FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE cascade;
+ALTER TABLE movie_abstracts_es ADD FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE cascade;
 
 -- other references
 ALTER TABLE image_licenses     ADD FOREIGN KEY (image_id) REFERENCES image_ids (id) ON DELETE cascade;

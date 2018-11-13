@@ -20,6 +20,16 @@ WITH t as (
   )
 DELETE from movie_abstracts_en where ctid in (select ctid FROM t WHERE row_number > 1);
 
+WITH t as (
+  select ctid, row_number() over (partition by movie_id), * from movie_abstracts_fr
+  )
+DELETE from movie_abstracts_fr where ctid in (select ctid FROM t WHERE row_number > 1);
+
+WITH t as (
+  select ctid, row_number() over (partition by movie_id), * from movie_abstracts_es
+  )
+DELETE from movie_abstracts_es where ctid in (select ctid FROM t WHERE row_number > 1);
+
 DELETE FROM movie_languages WHERE language IS NULL;
 
 WITH t as (

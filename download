@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# http://www.omdb.org/content/Help:DataDownload
+# https://www.omdb.org/content/Help:DataDownload
 #
 # Alle Textinformationen in omdb stehen sowohl unter der Creative
 # Commons-Lizenz (Namensnennung 2.0 Deutschland) als auch unter der GNU-Lizenz
@@ -8,13 +8,14 @@
 
 set -eu
 
-BASE="http://www.omdb.org/data/"
+BASE="https://www.omdb.org/data/"
 
 FILES="
 all_movies
 all_series
 all_seasons
 all_episodes
+all_movieseries
 
 all_people
 all_people_aliases
@@ -27,6 +28,7 @@ all_characters
 movie_categories
 movie_keywords
 category_names
+all_categories
 trailers
 movie_links
 
@@ -42,6 +44,9 @@ movie_details
 movie_references
 movie_abstracts_de
 movie_abstracts_en
+movie_abstracts_fr
+movie_abstracts_es
+movie_content_updates
 "
 
 for f in $FILES; do

@@ -34,6 +34,14 @@
 <p><b>Description</b>: <em>$abstract_en.abstract</em></p>
 [% END %]
 
+[% IF abstract_fr %]
+<p><b>Description</b>: <em>$abstract_fr.abstract</em></p>
+[% END %]
+
+[% IF abstract_es %]
+<p><b>Descripción</b>: <em>$abstract_es.abstract</em></p>
+[% END %]
+
 [% IF child_movies.0 %]
 Child movies:
 <ul>

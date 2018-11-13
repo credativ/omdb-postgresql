@@ -113,6 +113,10 @@ if ($path =~ m!^/movie/(\d+)!) {
 			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_de WHERE movie_id = ?", undef, $movie_id),
 		abstract_en =>
 			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_en WHERE movie_id = ?", undef, $movie_id),
+		abstract_fr =>
+			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_fr WHERE movie_id = ?", undef, $movie_id),
+		abstract_es =>
+			$dbh->selectrow_hashref("SELECT * FROM movie_abstracts_es WHERE movie_id = ?", undef, $movie_id),
 		images =>
 			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Movie' AND source <> ''", $movie_id),
 		trailers =>

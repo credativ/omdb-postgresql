@@ -12,6 +12,8 @@ ALTER TABLE job_names          ADD PRIMARY KEY (job_id, language);
 ALTER TABLE jobs               ADD PRIMARY KEY (id);
 ALTER TABLE movie_abstracts_de ADD PRIMARY KEY (movie_id);
 ALTER TABLE movie_abstracts_en ADD PRIMARY KEY (movie_id);
+ALTER TABLE movie_abstracts_fr ADD PRIMARY KEY (movie_id);
+ALTER TABLE movie_abstracts_es ADD PRIMARY KEY (movie_id);
 ALTER TABLE movie_categories   ADD PRIMARY KEY (movie_id, category_id);
 ALTER TABLE movie_countries    ADD PRIMARY KEY (movie_id, country);
 ALTER TABLE movie_keywords     ADD PRIMARY KEY (movie_id, category_id);

@@ -19,5 +19,7 @@ DELETE FROM movie_references   c WHERE NOT EXISTS (SELECT * FROM movies p     WH
 DELETE FROM movie_references   c WHERE NOT EXISTS (SELECT * FROM movies p     WHERE p.id = c.referenced_id);
 DELETE FROM movie_abstracts_de c WHERE NOT EXISTS (SELECT * FROM movies p     WHERE p.id = c.movie_id);
 DELETE FROM movie_abstracts_en c WHERE NOT EXISTS (SELECT * FROM movies p     WHERE p.id = c.movie_id);
+DELETE FROM movie_abstracts_fr c WHERE NOT EXISTS (SELECT * FROM movies p     WHERE p.id = c.movie_id);
+DELETE FROM movie_abstracts_es c WHERE NOT EXISTS (SELECT * FROM movies p     WHERE p.id = c.movie_id);
 
 COMMIT;

@@ -29,5 +29,7 @@ CREATE TABLE movie_countries (movie_id bigint, country country_code);
 CREATE TABLE movie_references (movie_id bigint, referenced_id bigint, type text);
 CREATE TABLE movie_abstracts_de (movie_id bigint, abstract text);
 CREATE TABLE movie_abstracts_en (movie_id bigint, abstract text);
+CREATE TABLE movie_abstracts_fr (movie_id bigint, abstract text);
+CREATE TABLE movie_abstracts_es (movie_id bigint, abstract text);
 
 COMMIT;
