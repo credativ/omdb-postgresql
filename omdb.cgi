@@ -174,6 +174,10 @@ if ($path =~ m!^/movie/(\d+)!) {
 	process('category', {
 		title => "$category->{name}",
 		category => $category,
+		names => selectall_hashrows("SELECT language, name FROM category_names WHERE category_id = ? ORDER BY language", $category_id),
+		root => ($category->{root_id} and $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category->{root_id})),
+		parent => ($category->{parent_id} and $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category->{parent_id})),
+		children => selectall_hashrows("SELECT * FROM categories WHERE parent_id = ? ORDER BY name", $category_id),
 		images =>
 			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Category' AND source <> ''", $category_id),
 		movies_cat => selectall_hashrows("SELECT m.* FROM movies m JOIN movie_categories c ON (m.id = c.movie_id) WHERE c.category_id = ? ORDER BY m.date", $category_id),

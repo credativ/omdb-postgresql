@@ -46,7 +46,7 @@ INSERT INTO jobs SELECT job_id, name FROM job_names WHERE language = 'en';
 \copy movie_categories      FROM PROGRAM 'bzcat www.omdb.org/data/movie_categories.csv.bz2'      WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_keywords        FROM PROGRAM 'bzcat www.omdb.org/data/movie_keywords.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy category_names        FROM PROGRAM 'bzcat www.omdb.org/data/category_names.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
-INSERT INTO categories SELECT category_id, name FROM category_names WHERE language = 'en';
+\copy categories (id, parent_id, root_id) FROM PROGRAM 'bzcat www.omdb.org/data/all_categories.csv.bz2' WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy trailers              FROM PROGRAM 'bzcat www.omdb.org/data/trailers.csv.bz2'              WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_links           FROM PROGRAM 'bzcat www.omdb.org/data/movie_links.csv.bz2'           WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy image_ids             FROM PROGRAM 'bzcat www.omdb.org/data/image_ids.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')

@@ -13,6 +13,7 @@ VACUUM;
 ANALYZE;
 \i 50-views.sql
 \i 51-purge_dirty.sql
+\i 52-category-en.sql
 \i 60-log.sql
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
