@@ -1,20 +1,21 @@
-([% FOR n IN names %]
+<small>[% FOR n IN names %]
 [% n.language %]: [% n.name %][% INCLUDE comma %]
-[% END %])
+[% END %]</small>
 
-<ul>
-[% IF root %]
-<li>Root category: <a href="$root.id-$root.name">$root.name</a></li>
+<p>
+<a href="all">Categories and Keywords</a>
+[% FOR p IN parents %]
+&raquo; <a href="$p.id-$p.name">$p.name</a>
 [% END %]
-[% IF parent %]
-<li>Parent category: <a href="$parent.id-$parent.name">$parent.name</a></li>
-[% END %]
+</p>
+
 [% IF children %]
+<ul>
 [% FOR c IN children %]
 <li>Child category: <a href="$c.id-$c.name">$c.name</a></li>
 [% END %]
-[% END %]
 </ul>
+[% END %]
 
 [% IF images.0 %]
 Images:

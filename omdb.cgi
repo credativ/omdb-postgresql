@@ -166,6 +166,12 @@ if ($path =~ m!^/movie/(\d+)!) {
 		cast => selectall_hashrows("SELECT *, p.name AS person_name, m.name AS movie_name FROM people p JOIN casts c ON (p.id = c.person_id) JOIN movies m ON (c.movie_id = m.id) WHERE c.role = ? ORDER BY m.date", $character),
 	});
 
+} elsif ($path =~ m!^/category/all!) {
+	process('category', {
+		title => "Categories and Keywords",
+		children => selectall_hashrows("SELECT * FROM categories WHERE parent_id IS NULL ORDER BY name"),
+	});
+
 } elsif ($path =~ m!^/category/(\d+)!) {
 	my $category_id = $1;
 	my $category = $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category_id)
@@ -175,8 +181,7 @@ if ($path =~ m!^/movie/(\d+)!) {
 		title => "$category->{name}",
 		category => $category,
 		names => selectall_hashrows("SELECT language, name FROM category_names WHERE category_id = ? ORDER BY language", $category_id),
-		root => ($category->{root_id} and $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category->{root_id})),
-		parent => ($category->{parent_id} and $dbh->selectrow_hashref("SELECT * FROM categories WHERE id = ?", undef, $category->{parent_id})),
+		parents => selectall_hashrows("WITH RECURSIVE cat AS (SELECT id, parent_id, name, 1 AS row FROM categories WHERE id = ? union ALL SELECT c2.id, c2.parent_id, c2.name, cat.row + 1 FROM categories c2 JOIN cat ON c2.id = cat.parent_id) SELECT id, name FROM cat ORDER BY row desc", $category_id),
 		children => selectall_hashrows("SELECT * FROM categories WHERE parent_id = ? ORDER BY name", $category_id),
 		images =>
 			selectall_hashrows("SELECT l.* FROM image_licenses l JOIN image_ids i ON l.image_id = i.id WHERE i.object_id = ? AND i.object_type = 'Category' AND source <> ''", $category_id),

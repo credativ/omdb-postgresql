@@ -33,7 +33,7 @@
 [% END %]
 &middot; </p>
 
-10 random keywords:
+10 random keywords: (<a href="$script_name/category/all">all</a>)
 <p>
 [% FOR c IN categories %]
 &middot; <a href="$script_name/category/$c.id-$c.name">$c.name</a></li>
