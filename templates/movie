@@ -6,7 +6,7 @@
 [% IF movie.homepage %]<li>Homepage: <a href="$movie.homepage">$movie.homepage</a></li>[% END %]
 [% IF movie.vote_average %]<li>Votes: $movie.vote_average ($movie.votes_count votes)</li>[% END %]
 [% IF series %]<li>Part of series: <a href="$series.id-$series.name">$series.name</a></li> [% END %]
-[% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a></li> [% END %]
+[% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a> ($parent.kind)</li> [% END %]
 [% IF countries.0 %]
 <li>Countries:
 [% FOR r IN countries %]<a href="../country/$r">$r</a>[% INCLUDE comma %][% END %]
