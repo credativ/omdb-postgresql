@@ -18,9 +18,5 @@ ANALYZE;
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE EXTENSION IF NOT EXISTS tsm_system_rows;
-DO $$ BEGIN
-  CREATE USER "www-data";
-EXCEPTION WHEN duplicate_object THEN
-END; $$ LANGUAGE plpgsql;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO "www-data";
-GRANT INSERT ON access_log TO "www-data";
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO public;
+GRANT INSERT ON access_log TO public;
