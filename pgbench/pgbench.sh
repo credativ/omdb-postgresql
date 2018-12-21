@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# CentOS compatibility
+for dir in /usr/pgsql-*/bin; do
+  test -d "$dir" && PATH="$dir:$PATH"
+done
+
 pgbench -n \
   -f movie.sql@10 \
   -f person.sql@10 \
