@@ -26,6 +26,9 @@ rm -f /usr/lib/cgi-bin/omdb
 ln -s $PWD/omdb.cgi /usr/lib/cgi-bin/omdb
 chmod +x omdb.cgi
 
+# create PostgreSQL user
+su -c 'createuser www-data' postgres || :
+
 cat <<EOF
 #######################################
 The OMDB CGI script has been installed:
