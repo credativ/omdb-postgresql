@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sed -e '1,/sed/d' $0 | psql -X; exit
+sed -e '1,/sed/d' $0 | psql -X postgres; exit
 
 CREATE DATABASE omdb;
 
