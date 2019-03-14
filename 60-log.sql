@@ -7,5 +7,6 @@ CREATE TABLE access_log (
   path text NOT NULL,
   runtime double precision
 );
+ALTER TABLE access_log OWNER TO postgres;
 
 COMMIT;

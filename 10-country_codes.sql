@@ -152,3 +152,4 @@ CREATE TYPE country_code AS ENUM (
 'WS',
 'ZA',
 'ZW');
+ALTER TYPE country_code OWNER TO postgres;

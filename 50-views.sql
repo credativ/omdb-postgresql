@@ -25,3 +25,4 @@ CREATE VIEW casts_view AS
     JOIN movies m ON c.movie_id = m.id
     JOIN people p ON c.person_id = p.id
     JOIN jobs j ON c.job_id = j.id;
+ALTER VIEW casts_view OWNER TO postgres;
