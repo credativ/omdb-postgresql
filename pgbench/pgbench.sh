@@ -5,6 +5,9 @@ for dir in /usr/pgsql-*/bin; do
   test -d "$dir" && PATH="$dir:$PATH"
 done
 
+# suggested options:
+# ./pgbench.sh --time 3600 --client 4 --progress 5
+
 pgbench -n \
   -f movie.sql@10 \
   -f person.sql@10 \
