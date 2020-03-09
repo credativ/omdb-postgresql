@@ -127,6 +127,7 @@ CREATE TYPE country_code AS ENUM (
 'RU',
 'RW',
 'SA',
+'SD',
 'SE',
 'SG',
 'SI',
