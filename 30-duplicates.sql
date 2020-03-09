@@ -54,4 +54,19 @@ WITH t as (
   )
 DELETE from casts where ctid in (select ctid FROM t WHERE row_number > 1);
 
+WITH t as (
+  select ctid, row_number() over (partition by category_id, language), * from category_names
+  )
+DELETE from category_names where ctid in (select ctid FROM t WHERE row_number > 1);
+
+WITH t as (
+  select ctid, row_number() over (partition by job_id, language), * from job_names
+  )
+DELETE from job_names where ctid in (select ctid FROM t WHERE row_number > 1);
+
+WITH t as (
+  select ctid, row_number() over (partition by id), * from jobs
+  )
+DELETE from jobs where ctid in (select ctid FROM t WHERE row_number > 1);
+
 COMMIT;
