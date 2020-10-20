@@ -99,6 +99,7 @@ CREATE TYPE country_code AS ENUM (
 'MR',
 'MT',
 'MU',
+'MW',
 'MX',
 'MY',
 'NA',
@@ -141,6 +142,7 @@ CREATE TYPE country_code AS ENUM (
 'TR',
 'TT',
 'TW',
+'TZ',
 'UA',
 'UG',
 'US',
@@ -152,5 +154,6 @@ CREATE TYPE country_code AS ENUM (
 'VU',
 'WS',
 'ZA',
+'ZM',
 'ZW');
 ALTER TYPE country_code OWNER TO postgres;
