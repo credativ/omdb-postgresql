@@ -79,6 +79,7 @@ CREATE TYPE country_code AS ENUM (
 'KH',
 'KP',
 'KR',
+'KY',
 'KZ',
 'LA',
 'LB',
