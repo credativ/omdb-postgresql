@@ -12,7 +12,7 @@ CREATE TABLE casts (movie_id bigint, person_id bigint, job_id bigint, role text,
 CREATE TABLE job_names (job_id bigint, name text, language iso639);
 CREATE TABLE jobs (id bigint, name text);
 COMMENT ON TABLE jobs IS 'English-only version of job_names';
-CREATE TABLE characters (id bigint, name text);
+--CREATE TABLE characters (id bigint, name text);
 CREATE TABLE movie_categories (movie_id bigint, category_id bigint);
 CREATE TABLE movie_keywords (movie_id bigint, category_id bigint);
 CREATE TABLE categories (id bigint, parent_id bigint, root_id bigint, name text);

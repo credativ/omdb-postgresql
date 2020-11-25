@@ -42,7 +42,7 @@ FROM import_movies m
 \copy casts                 FROM PROGRAM 'bzcat www.omdb.org/data/all_casts.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy job_names             FROM PROGRAM 'bzcat www.omdb.org/data/job_names.csv.bz2'             WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 INSERT INTO jobs SELECT job_id, name FROM job_names WHERE language = 'en';
-\copy characters            FROM PROGRAM 'bzcat www.omdb.org/data/all_characters.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
+--\copy characters          FROM PROGRAM 'bzcat www.omdb.org/data/all_characters.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_categories      FROM PROGRAM 'bzcat www.omdb.org/data/movie_categories.csv.bz2'      WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy movie_keywords        FROM PROGRAM 'bzcat www.omdb.org/data/movie_keywords.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')
 \copy category_names        FROM PROGRAM 'bzcat www.omdb.org/data/category_names.csv.bz2'        WITH (FORMAT CSV, HEADER TRUE, NULL '\N', ESCAPE '\')

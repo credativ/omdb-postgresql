@@ -23,7 +23,6 @@ people_links
 
 all_casts
 job_names
-all_characters
 
 movie_categories
 movie_keywords
@@ -48,6 +47,8 @@ movie_abstracts_fr
 movie_abstracts_es
 movie_content_updates
 "
+
+# omitted: all_characters (not used in schema)
 
 for f in $FILES; do
   wget --mirror "$BASE$f.csv.bz2"

@@ -1,6 +1,6 @@
 BEGIN;
 
-ALTER TABLE characters         ADD PRIMARY KEY (id);
+--ALTER TABLE characters         ADD PRIMARY KEY (id);
 ALTER TABLE movie_aliases_iso  ADD PRIMARY KEY (movie_id, name, language, official_translation);
 ALTER TABLE people             ADD PRIMARY KEY (id);
 ALTER TABLE people_aliases     ADD PRIMARY KEY (person_id, name);
