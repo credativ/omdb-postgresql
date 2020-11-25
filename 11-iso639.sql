@@ -117,4 +117,3 @@ CREATE TYPE iso639 AS ENUM (
 'yi',
 'zh',
 'zu');
-ALTER TYPE iso639 OWNER TO postgres;

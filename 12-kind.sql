@@ -5,4 +5,3 @@ CREATE TYPE kind AS ENUM (
 'episode',
 'movieseries'
 );
-ALTER TYPE kind OWNER TO postgres;
