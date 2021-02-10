@@ -53,6 +53,7 @@ CREATE TYPE iso639 AS ENUM (
 'km',
 'kn',
 'ko',
+'ks',
 'ku',
 'ky',
 'la',
