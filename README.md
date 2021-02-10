@@ -1,7 +1,7 @@
 About omdb
 ----------
 
-http://www.omdb.org/content/About
+https://www.omdb.org/content/About
 
 omdb (open media database) is a free database for film media. There is no set
 editorial staff, but rather a large number of movie addicts and lovers who
@@ -21,13 +21,13 @@ self-contained film database.
 Copyright: Alle Textinformationen auf omdb.org unterliegen der Creative
 Commons-Lizenz (Namensnennung 2.0 Deutschland).
 
-http://www.omdb.org/content/Copyright
+https://www.omdb.org/content/Copyright
 https://creativecommons.org/licenses/by/2.0/de/
 
 About omdb-postgresql
 ---------------------
 
-This database contains CSV data downloaded from http://www.omdb.org/content/Help:DataDownload,
+This database contains CSV data downloaded from https://www.omdb.org/content/Help:DataDownload,
 imported into a normalized PostgreSQL database schema. The data is basically
 unmodified, except for the removal of entries that would violate foreign key
 constraints. The database import script also removes some adult movies.
@@ -37,3 +37,5 @@ keys) in order to serve as a playground for database optimization.
 
 This CGI script is developed by credativ, independently from omdb, and licensed
 under the GNU GPL, version 2 or later.
+
+List of other sample databases for PostgreSQL: https://wiki.postgresql.org/wiki/Sample_Databases

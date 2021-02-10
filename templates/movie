@@ -109,7 +109,7 @@ Links:
   [% IF r.source == "amazon" %]
     <a href="https://www.amazon.de/s/ref=nb_sb_noss?field-keywords=$r.key">Amazon: $r.key</a> ($r.language)
   [% ELSIF r.source == "imdbmovie" OR r.source == "imdbepisode" %]
-    <a href="http://www.imdb.com/title/$r.key/">IMDB: $r.key</a>
+    <a href="https://www.imdb.com/title/$r.key/">IMDB: $r.key</a>
   [% ELSIF r.source == "wikidata" %]
     <a href="https://www.wikidata.org/wiki/$r.key">Wikidata: $r.key</a>
   [% ELSIF r.source == "wikipedia" %]

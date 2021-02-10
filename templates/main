@@ -43,7 +43,7 @@
 <h2>About omdb</h2>
 
 <p>
-<a href="http://www.omdb.org/content/About">
+<a href="https://www.omdb.org/content/About">
 <img src="https://www.omdb.org/images/layout/omdb-logo.png" style="float:right;">
 omdb</a> (open media database) is a
 free database for film media. There is no set editorial staff, but rather a
@@ -65,7 +65,7 @@ self-contained film database.
 </p>
 
 <p>
-<a href="http://www.omdb.org/content/Copyright"><em>Copyright</em></a>:
+<a href="https://www.omdb.org/content/Copyright"><em>Copyright</em></a>:
 Alle Textinformationen auf omdb.org unterliegen der
 <a href="https://creativecommons.org/licenses/by/2.0/de/">Creative Commons-Lizenz
 (Namensnennung 2.0 Deutschland)</a>.
@@ -75,7 +75,7 @@ Alle Textinformationen auf omdb.org unterliegen der
 
 <p>
 This database contains CSV data downloaded from
-<a href="http://www.omdb.org/content/Help:DataDownload">www.omdb.org</a>,
+<a href="https://www.omdb.org/content/Help:DataDownload">www.omdb.org</a>,
 imported into a normalized PostgreSQL database schema. The data is basically
 unmodified, except for the removal of entries that would violate foreign key
 constraints. The database import script also removes some adult movies.
