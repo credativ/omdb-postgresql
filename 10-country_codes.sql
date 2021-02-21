@@ -156,4 +156,5 @@ CREATE TYPE country_code AS ENUM (
 'WS',
 'ZA',
 'ZM',
-'ZW');
+'ZW',
+'SO');
