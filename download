@@ -51,5 +51,5 @@ movie_content_updates
 # omitted: all_characters (not used in schema)
 
 for f in $FILES; do
-  wget --mirror "$BASE$f.csv.bz2"
+  wget --no-verbose --mirror "$BASE$f.csv.bz2"
 done
