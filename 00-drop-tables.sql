@@ -30,8 +30,6 @@ DROP TABLE IF EXISTS movie_abstracts_en CASCADE;
 DROP TABLE IF EXISTS movie_abstracts_fr CASCADE;
 DROP TABLE IF EXISTS movie_abstracts_es CASCADE;
 
-DROP TYPE IF EXISTS country_code;
-DROP TYPE IF EXISTS iso639;
 DROP TYPE IF EXISTS kind;
 
 DROP TABLE IF EXISTS access_log;

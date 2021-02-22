@@ -1,6 +1,4 @@
 \i 00-drop-tables.sql
-\i 10-country_codes.sql
-\i 11-iso639.sql
 \i 12-kind.sql
 \i 13-schema.sql
 \i 20-import.sql
