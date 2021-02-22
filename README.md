@@ -39,3 +39,21 @@ This CGI script is developed by credativ, independently from omdb, and licensed
 under the GNU GPL, version 2 or later.
 
 List of other sample databases for PostgreSQL: https://wiki.postgresql.org/wiki/Sample_Databases
+
+Building the omdb Database
+--------------------------
+
+Download the files from omdb.org:
+```
+./download
+```
+
+Import into the omdb PostgreSQL database:
+```
+./import
+```
+
+Create `omdb.dump` database export file:
+```
+pg_dump -Fc -f omdb.dump omdb
+```
