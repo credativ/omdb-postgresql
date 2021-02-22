@@ -1,0 +1,32 @@
+name: omdb-postgresql
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: swordfish
+          # Set health checks to wait until postgres has started
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: swordfish
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: ./download
+      - run: ./import
+      - name: Create omdb.dump
+        run: pg_dump -Fc -f omdb.dump omdb
+      - run: ls -al omdb.dump
