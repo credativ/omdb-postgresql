@@ -49,7 +49,8 @@ movie_content_updates
 "
 
 # omitted: all_characters (not used in schema)
-
+rm -rf www.omdb.org/data
+mkdir -p www.omdb.org/data
 for f in $FILES; do
-  wget --no-verbose --mirror "$BASE$f.csv.bz2"
+  curl "$BASE$f.csv.bz2" -# --output www.omdb.org/data/"$f.csv.bz2"
 done
