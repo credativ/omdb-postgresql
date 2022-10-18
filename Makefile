@@ -5,7 +5,7 @@ PGUSER = postgres
 dump: omdb.dump
 
 omdb.dump: www.omdb.org/data/all_movies.csv.bz2
-	pg_virtualenv -i '--auth=trust --username=$(PGUSER)' -v $(PGVERSION) sh -c "export PGUSER=$(PGUSER) && ./import && pg_dump -Fc -f $@ omdb"
+	pg_virtualenv -i '--auth=trust --username=$(PGUSER)' -v $(PGVERSION) sh -c "export PGUSER=$(PGUSER) && ./import && PATH=/usr/lib/postgresql/$(PGVERSION)/bin:/usr/pgsql-$(PGVERSION)/bin:$(PATH) pg_dump -Fc -f $@ omdb"
 
 www.omdb.org/data/all_movies.csv.bz2:
 	./download
