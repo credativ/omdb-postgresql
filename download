@@ -53,3 +53,5 @@ movie_content_updates
 for f in $FILES; do
   wget --no-verbose --mirror "$BASE$f.csv.bz2"
 done
+
+bunzip2 --keep --force www.omdb.org/data/*.bz2
