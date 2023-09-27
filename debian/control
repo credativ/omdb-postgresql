@@ -1,0 +1,28 @@
+Source: omdb-postgresql
+Section: database
+Priority: optional
+Maintainer: Christoph Berg <myon@debian.org>
+Build-Depends:
+ debhelper-compat (= 13),
+ postgresql,
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+Homepage: https://www.omdb.org/
+Vcs-Browser: https://github.com/df7cb/omdb-postgresql
+Vcs-Git: https://github.com/df7cb/omdb-postgresql.git
+
+Package: omdb-postgresql
+Architecture: all
+Depends:
+ ${misc:Depends},
+Recommends:
+ postgresql,
+Description: open media database for PostgreSQL
+ omdb (open media database) is a free database for film media. This package
+ packs omdb into a PostgreSQL database. The PostgreSQL schema is intentionally
+ not optimized (no indexes besides primary keys) in order to serve as a
+ playground for database optimization.
+ .
+ To import the data, do:
+  createdb omdb
+  pg_restore -d omdb /usr/share/omdb-postgresql/omdb.dump

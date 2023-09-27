@@ -1,0 +1,5 @@
+omdb-postgresql (2023-09-27-1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 27 Sep 2023 13:33:41 +0200

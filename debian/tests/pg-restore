@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eux
+
+pg_virtualenv <<EOF
+    set -eux
+    export PGDATABASE=omdb
+    createdb omdb
+    psql -c 'create user postgres' || :
+    psql -c 'drop schema if exists public'
+    pg_restore -d omdb -j4 /usr/share/omdb-postgresql/omdb.dump
+    psql -c 'select * from people where id = 1' | grep 'George Lucas'
+EOF
