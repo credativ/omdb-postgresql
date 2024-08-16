@@ -57,3 +57,14 @@ Create `omdb.dump` database export file:
 ```
 pg_dump -Fc -f omdb.dump omdb
 ```
+
+Using docker
+--------------------------
+Docker compose will create postgres database
+and do the importing automatically.
+Created database can be accessed using credentials 
+specified in environment section of the docker-compose.yaml.
+
+```shell
+docker compose up
+```

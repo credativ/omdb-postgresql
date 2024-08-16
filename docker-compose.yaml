@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db:
+    build: .
+    container_name: "postgres_db"
+    environment:
+      POSTGRES_PASSWORD: omdbmovies
+      POSTGRES_USER: omdbmovies
+      POSTGRES_NAME: omdbmovies
+    ports:
+      - "54325:5432"
