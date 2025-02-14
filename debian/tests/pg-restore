@@ -7,7 +7,8 @@ pg_virtualenv <<EOF
     export PGDATABASE=omdb
     createdb omdb
     psql -c 'create user postgres' || :
-    psql -c 'drop schema if exists public'
-    pg_restore -d omdb -j4 /usr/share/omdb-postgresql/omdb.dump
+    pg_restore -l /usr/share/omdb-postgresql/omdb.dump > omdb.list
+    grep -vw 'SCHEMA' omdb.list > omdb.filtered
+    pg_restore -L omdb.filtered -d omdb -j4 /usr/share/omdb-postgresql/omdb.dump
     psql -c 'select * from people where id = 1' | grep 'George Lucas'
 EOF

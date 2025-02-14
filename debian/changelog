@@ -1,3 +1,9 @@
+omdb-postgresql (2023-09-27-2) unstable; urgency=medium
+
+  * Fix pg_restore test to work with all server versions.
+
+ -- Christoph Berg <myon@debian.org>  Fri, 14 Feb 2025 14:47:53 +0000
+
 omdb-postgresql (2023-09-27-1) unstable; urgency=medium
 
   * Initial release.
