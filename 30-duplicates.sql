@@ -36,6 +36,7 @@ WITH t as (
 DELETE from movie_countries where ctid in (select ctid FROM t WHERE row_number > 1);
 
 DELETE FROM movie_languages WHERE language IS NULL;
+DELETE FROM movie_aliases_iso WHERE language IS NULL;
 
 WITH t as (
   select ctid, row_number() over (partition by movie_id, language), * from movie_languages
